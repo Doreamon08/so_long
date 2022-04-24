@@ -6,7 +6,7 @@
 /*   By: rabbie <rabbie@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 14:58:17 by rabbie            #+#    #+#             */
-/*   Updated: 2022/04/19 16:50:57 by rabbie           ###   ########.fr       */
+/*   Updated: 2022/04/24 11:32:38 by rabbie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	init_vars(t_map *struc_map, char **map)
 {
 	struc_map->map = map;
 	struc_map->player = 0;
+	struc_map->player_x = 0;
+	struc_map->player_y = 0;
 	struc_map->collect = 0;
 	struc_map->exit = 0;
 	struc_map->height = 0;
@@ -76,6 +78,13 @@ void	check_walls(t_map *struc_map)
 	}
 }
 
+void	init_coord_player(t_map *struc_map)
+{
+	struc_map->player++;
+	struc_map->player_x = struc_map->x;
+	struc_map->player_y = struc_map->y;
+}
+
 void	check_other(t_map *struc_map)
 {
 	while (struc_map->map[struc_map->y])
@@ -83,7 +92,7 @@ void	check_other(t_map *struc_map)
 		while (struc_map->map[struc_map->y][struc_map->x])
 		{
 			if (struc_map->map[struc_map->y][struc_map->x] == 'P')
-				struc_map->player++;
+				init_coord_player(struc_map);
 			else if (struc_map->map[struc_map->y][struc_map->x] == 'C')
 				struc_map->collect++;
 			else if (struc_map->map[struc_map->y][struc_map->x] == 'E')
@@ -107,11 +116,11 @@ void	check_other(t_map *struc_map)
 t_map	*check_valid_map(char **map)
 {
 	t_map	*struc_map;
-	
+
 	struc_map = malloc(sizeof(t_map));
 	init_vars(struc_map, map);
 	check_hw(struc_map);
 	check_walls(struc_map);
 	check_other(struc_map);
-	return(struc_map);
+	return (struc_map);
 }

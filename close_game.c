@@ -1,41 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   close_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rabbie <rabbie@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/17 15:04:00 by rabbie            #+#    #+#             */
-/*   Updated: 2022/04/24 14:22:10 by rabbie           ###   ########.fr       */
+/*   Created: 2022/04/24 12:53:32 by rabbie            #+#    #+#             */
+/*   Updated: 2022/04/24 13:01:56 by rabbie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-void	errors(char *str)
+void	close_game(t_data *data)
 {
-	int	i;
+	data->struc_map->x = 0;
+	data->struc_map->y = 0;
 
-	i = 0;
-	while (str[i])
+	while (data->struc_map->map[data->struc_map->y])
 	{
-		write (1, &str[i], 1);
-		i++;
+		free(data->struc_map->map[data->struc_map->y]);
+		data->struc_map->y++;
 	}
-	exit(0);
-}
-
-void	map_error(t_map *struc_map, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		write (1, &str[i], 1);
-		i++;
-	}
-	free_char(struc_map->map);
-	free(struc_map);
-	exit(0);
+	free(data->struc_map->map);
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 }

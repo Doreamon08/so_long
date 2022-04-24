@@ -6,7 +6,7 @@
 /*   By: rabbie <rabbie@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 16:44:54 by rabbie            #+#    #+#             */
-/*   Updated: 2022/04/22 21:38:54 by rabbie           ###   ########.fr       */
+/*   Updated: 2022/04/24 14:20:33 by rabbie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ typedef struct s_map
 	int		collect;
 	int		enemies;
 	int		player;
+	int		player_x;
+	int		player_y;
 	int		exit;
 	int		walls;
 	int		floor;
@@ -84,6 +86,7 @@ typedef struct s_data
 	t_image	floor;
 	t_image	collect;
 	t_image	player;
+	t_image	exit;
 }				t_data;
 
 typedef struct s_rect
@@ -101,5 +104,8 @@ void	map_error(t_map *struc_map, char *str);
 void	free_char(char **temp);
 t_map	*check_valid_map(char **map);
 t_map	*map(char *map_name, int av);
+int		render(t_data *data);
+void	player_move(t_data *data, int keysym);
+void	close_game(t_data *data);
 
 #endif

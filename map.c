@@ -6,12 +6,11 @@
 /*   By: rabbie <rabbie@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 13:52:06 by rabbie            #+#    #+#             */
-/*   Updated: 2022/04/19 16:53:36 by rabbie           ###   ########.fr       */
+/*   Updated: 2022/04/24 13:21:17 by rabbie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-#include <stdio.h>
 
 void	free_char(char **temp)
 {
@@ -112,14 +111,6 @@ t_map	*map(char *map_name, int av)
 		line = get_next_line(fd);
 	}
 	struc_map = check_valid_map(map);
-	printf("%d - width, %d - height\n", struc_map->width, struc_map->height);
+	close(fd);
 	return (struc_map);
-	// map_printer(map);
-	// free_char(map);
-	// close(fd);
 }
-
-// int	main(int ac, char **av)
-// {
-// 	map(av[1], ac);
-// }
