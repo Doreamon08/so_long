@@ -6,26 +6,11 @@
 /*   By: rabbie <rabbie@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/18 14:58:17 by rabbie            #+#    #+#             */
-/*   Updated: 2022/04/24 11:32:38 by rabbie           ###   ########.fr       */
+/*   Updated: 2022/04/27 20:06:08 by rabbie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
-#include <stdio.h>
-
-void	init_vars(t_map *struc_map, char **map)
-{
-	struc_map->map = map;
-	struc_map->player = 0;
-	struc_map->player_x = 0;
-	struc_map->player_y = 0;
-	struc_map->collect = 0;
-	struc_map->exit = 0;
-	struc_map->height = 0;
-	struc_map->width = 0;
-	struc_map->y = 0;
-	struc_map->x = 0;
-}
 
 void	check_hw(t_map *struc_map)
 {

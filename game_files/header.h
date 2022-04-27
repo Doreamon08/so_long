@@ -6,7 +6,7 @@
 /*   By: rabbie <rabbie@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/30 16:44:54 by rabbie            #+#    #+#             */
-/*   Updated: 2022/04/24 14:20:33 by rabbie           ###   ########.fr       */
+/*   Updated: 2022/04/27 20:22:31 by rabbie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,19 @@
 # define HEADER_H
 
 # include <stdlib.h>
-# include <stdio.h>
+# include <unistd.h>
 
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <mlx.h>
 
-# include "get_next_line/get_next_line.h"
+# include "../get_next_line/get_next_line.h"
 
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
 
-# define WINDOW_WIDTH 600
-# define WINDOW_HEIGHT 300
-
 # define MLX_ERROR 1
-
-# define RED_PIXEL 0xFF0000
-# define GREEN_PIXEL 0xFF00
-# define WHITE_PIXEL 0xFFFFFF
 
 typedef struct s_img
 {
@@ -80,6 +73,7 @@ typedef struct s_data
 	void	*win_ptr;
 	int		x;
 	int		y;
+	int		steps;
 	t_img	img;
 	t_map	*struc_map;
 	t_image	wall;
@@ -107,5 +101,7 @@ t_map	*map(char *map_name, int av);
 int		render(t_data *data);
 void	player_move(t_data *data, int keysym);
 void	close_game(t_data *data);
+void	ft_putnbr_fd(int n, int fd);
+void	init_vars(t_map *struc_map, char **map);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: rabbie <rabbie@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/17 13:52:06 by rabbie            #+#    #+#             */
-/*   Updated: 2022/04/24 13:21:17 by rabbie           ###   ########.fr       */
+/*   Updated: 2022/04/27 20:11:50 by rabbie           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,22 @@ void	extension(char *map_name)
 	char	*ext;
 
 	ext = ".ber";
-	i = 0;	
+	i = 0;
 	len_map_name = ft_strlen(map_name);
 	if (len_map_name < 5)
+	{
 		errors("Extension error\n");
+		exit (0);
+	}
 	while (i < 4)
 	{
 		if (map_name[(len_map_name - i) - 1] == ext[(4 - i) - 1])
 			i++;
 		else
+		{
 			errors("Extension error\n");
+			exit (0);
+		}
 	}
 }
 
@@ -110,7 +116,7 @@ t_map	*map(char *map_name, int av)
 		map = unit_char(map, line);
 		line = get_next_line(fd);
 	}
-	struc_map = check_valid_map(map);
 	close(fd);
+	struc_map = check_valid_map(map);
 	return (struc_map);
 }
