@@ -6,7 +6,7 @@
 #    By: rabbie <rabbie@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/27 20:16:04 by rabbie            #+#    #+#              #
-#    Updated: 2022/04/27 20:29:31 by rabbie           ###   ########.fr        #
+#    Updated: 2022/05/02 14:42:54 by rabbie           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,36 +20,35 @@ SRCS = game_files/check_valid_map.c\
        game_files/move_player.c\
 	   game_files/renders.c\
        game_files/utils.c\
-	   ../get_next_line/get_next_line_utils.c\
-	   ../get_next_line/get_next_line.c\
-       ft_split.c\
-        
-HEADER = header.h get_next_line/get_next_line.h
+	   get_next_line/get_next_line_utils.c\
+	   get_next_line/get_next_line.c\
 
 OBJ = $(SRCS:.c=.o)
 
-OBJ_B = $(SRCS_B:%.c=%.o)
-
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -lX11 -lXext -lmlx
+INC = -I ./game_files -I ./minilibx-linux -I ./get_next_line
+
+LIB = -L ./minilibx-linux -lmlx -lXext -lX11 -lm -lbsd
+
+CFLAGS = -Wall -Wextra -Werror
 
 .PHONY : all clean fclean re
 
-all : $(NAME)
+all : $(NAME) $(OBJ)
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+	make -C minilibx-linux
+	$(CC) $(CFLAGS) -o $@ $^ $(LIB)
 
-bonus : $(NAME_BONUS)
-
-$(NAME_BONUS) : $(OBJ_B)
-	$(CC) $(CFLAGS) $(OBJ_B) -o $(NAME_BONUS)
+game_files/%.o: game_files/%.c
+	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
 
 clean :
-	rm -f $(OBJ) $(OBJ_B)
+	rm -f $(OBJ)
 
 fclean : clean
-	$(RM) $(NAME) $(NAME_BONUS)
+	$(RM) $(NAME)
+	make clean -C minilibx-linux
 
 re : fclean all
